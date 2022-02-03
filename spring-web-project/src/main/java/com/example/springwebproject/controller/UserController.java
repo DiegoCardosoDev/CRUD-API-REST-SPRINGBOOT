@@ -15,6 +15,8 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
+    public static final String ID = "/{id}";
+
 
     /* INJEÇÃO DE DEPENCIA */
     @Autowired
@@ -31,20 +33,21 @@ public class UserController {
 
 
     /* PROCURAR POR ID  -> localhost:8080//users/1 */
-   @GetMapping(value = "/{id}")
+   @GetMapping(value = ID)
     public ResponseEntity<User> findById(@PathVariable Long id){
        User user = userService.findById(id);
        return ResponseEntity.ok().body(user);
    }
 
     /* DELETAR -> localhost:8080//users/1 */
-   @DeleteMapping(value = "/{id}")
+   @DeleteMapping(value = ID)
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
         return ResponseEntity.noContent()
                 .build();
    }
 
+    /* CRIAR -> localhost:8080//users */
    @PostMapping    /* CRIAR USERS -> localhost:8080//users */
    public ResponseEntity<User> create(@RequestBody User user){
        userService.create(user);
@@ -54,10 +57,12 @@ public class UserController {
 
    }
 
-   @PutMapping(value = "/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody  User user){
-       User newUser = userService.update(id, user);
-       return ResponseEntity.ok().body(user);
+    /* ATUALIZAR -> localhost:8080//users/1 */
+   @PutMapping(value = ID)
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody  User obj){
+       obj.setId(id);
+       User newUser = userService.update(id, obj);
+       return ResponseEntity.ok().body(newUser);
 
    }
 
