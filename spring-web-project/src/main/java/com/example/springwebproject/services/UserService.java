@@ -3,15 +3,16 @@ package com.example.springwebproject.services;
 import com.example.springwebproject.entities.User;
 import com.example.springwebproject.repositories.UserRepository;
 import com.example.springwebproject.services.exeptions.ObjectNotFoudExeption;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
+
     private UserRepository userRepository;
 
     //procurar por id

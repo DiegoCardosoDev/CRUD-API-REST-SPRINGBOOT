@@ -3,7 +3,7 @@ package com.example.springwebproject.controller;
 
 import com.example.springwebproject.entities.User;
 import com.example.springwebproject.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -19,7 +20,6 @@ public class UserController {
 
 
     /* INJEÇÃO DE DEPENCIA */
-    @Autowired
     private UserService userService;
 
 
