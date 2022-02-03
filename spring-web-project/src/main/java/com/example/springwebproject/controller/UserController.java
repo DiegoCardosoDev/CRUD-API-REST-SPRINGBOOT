@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -47,6 +48,7 @@ public class UserController {
     public ResponseEntity<ResponseDTO> findById(@PathVariable Long id){
        ResponseDTO responseDTO = new ResponseDTO();
 
+
        try {
            User user = userService.findById(id);
            responseDTO.setData(user);
@@ -54,6 +56,8 @@ public class UserController {
 
        }catch (Exception ex ){
            ex.printStackTrace();
+           responseDTO.setMessage("não encontrado");
+           responseDTO.setData(LocalDateTime.now());
            return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
        }
 
@@ -104,7 +108,6 @@ public class UserController {
        try {
            obj.setId(id);
            User newUser = userService.update(id, obj);
-
            responseDTO.setData(newUser);
            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 

@@ -3,6 +3,10 @@ package com.example.springwebproject.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -15,6 +19,9 @@ import java.util.List;
 @Builder
 @ToString
 public class ResponseDTO {
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private Object data;
     @Setter(AccessLevel.PUBLIC)
     @Getter(AccessLevel.PUBLIC)
